@@ -48,7 +48,7 @@ This gate is **non-negotiable**. Even for a one-line typo fix. The cost of a sin
 Before pushing, run a residual-string grep against the patterns you know are sensitive in your environment. Example for my setup:
 
 ```bash
-grep -rEn 'spv|svai|PLT-|<my-employer>|<customer-name>' ~/git/bjorges/slop/
+grep -rEn 'acme|foo-internal|<your-org>|<customer-name>|PROJ-' ~/git/bjorges/slop/
 ```
 
 Any hit deserves a second look. `@linus` should already have caught these — this is belt-and-suspenders.

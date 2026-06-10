@@ -1,0 +1,131 @@
+# Scratch workspace .gitignore — inverse whitelist
+#
+# Philosophy: ignore EVERYTHING by default, then explicitly allow only the
+# small set of infrastructure files that should be tracked.
+#
+# This prevents accidental commits of task state, secrets, logs, credentials,
+# or any other ad-hoc content that lives in a scratch workspace.
+#
+# To force-track a specific file that would otherwise be ignored:
+#   git add -f path/to/your-file.md
+
+# ── Step 1: Ignore everything ──────────────────────────────────────────────
+*
+
+# ── Step 2: Un-ignore tracked infrastructure files ─────────────────────────
+!.gitignore
+!README.md
+!AGENTS.md
+!LICENSE
+
+# ⚠️  TEMPLATE-IN-REPO EXCEPTION — READ BEFORE DEPLOYING ⚠️
+# The two lines below exist ONLY because this template lives nested inside
+# a larger repo (slop). They let git track this example directory.
+# ─────────────────────────────────────────────────────────────────────────────
+# REMOVE THESE TWO LINES when you copy this file to your own standalone
+# scratch workspace. Keeping them in a standalone repo is harmless, but
+# they are unnecessary and may cause confusion.
+# ─────────────────────────────────────────────────────────────────────────────
+!examples/
+!examples/**
+
+# ── HARD DENY — never track, even with `git add -f` ───────────────────────
+# These patterns are anchored here so that `git add -f` on a matching path
+# will be silently rejected.  If you intentionally need to track one of these
+# files, rename it first to something outside these patterns.
+
+# Secrets and credentials
+**/.env
+**/.env.*
+**/secrets.*
+**/credentials.*
+**/token
+**/token.*
+
+# Cookie / browser session artifacts
+**/cookie
+**/cookie.*
+**/cookies
+**/cookies.*
+**/cookiejar
+**/cookiejar.*
+**/*cookies.json
+**/*session.json
+**/*sessions.json
+
+# SSH private keys
+**/id_rsa
+**/id_ed25519
+**/id_dsa
+**/id_ecdsa
+**/*.ppk
+
+# Kubernetes config (may contain cluster credentials)
+**/.kube/
+**/kubeconfig
+**/kubeconfig.*
+
+# Other common credential / secret patterns
+**/*secret*
+**/*password*
+**/*passwd*
+**/*apikey*
+**/*api_key*
+
+# TLS / PKI artefacts
+**/*.pem
+**/*.key
+**/*.crt
+**/*.cer
+**/*.p12
+**/*.pfx
+**/*.der
+
+# Cloud provider CLI state
+**/.aws/
+**/.azure/
+**/.gcloud/
+**/azure-cli/
+**/gcloud/
+
+# Logs
+**/*.log
+**/logs/
+**/*.log.*
+
+# Local issue tracking (dcat / dogcat)
+**/.dogcats/
+
+# Task state folders (the whole tasks/ tree is ignored)
+tasks/
+
+# Session-resume files contain task context that may include internal URLs,
+# issue keys, org names, and other potentially sensitive coordination state.
+# They are hard-denied here to prevent accidental force-adds.
+# If you genuinely need to publish a session-resume file, sanitise it first
+# and rename it (e.g. tasks/<ID>/sanitised-handoff.md) before force-adding.
+SESSION-RESUME-*.md
+**/SESSION-RESUME-*.md
+
+# Editor and OS artefacts
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Python / Node / other tool caches
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+node_modules/
+.npm/
+.cache/
+
+# Temporary files
+*.tmp
+*.bak
+*.orig
