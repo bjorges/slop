@@ -7,6 +7,7 @@ Heavily inspired by — and named after — [@oroddlokken's slop repo](https://g
 ## What's in here
 
 - [`opencode/agents/`](opencode/agents/) — my OpenCode sub-agent definitions (the Bobiverse crew). A coordinator agent (`bob`) delegates to specialists for recon, implementation, verification, code review, git workflow, and cross-model critique.
+- [`examples/scratch-workspace/`](examples/scratch-workspace/) — a reusable template for a scratch/coordination workspace: a local git repo used for ad-hoc investigation and multi-repo task coordination, with agent rules, an inverse-whitelist `.gitignore`, and optional [dogcat](https://github.com/oroddlokken/dogcat) integration.
 
 ## My OpenCode agent workflow
 
