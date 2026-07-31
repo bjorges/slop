@@ -41,6 +41,7 @@ permission:
     "python3 -m pytest*": allow
     "python3 -m venv*": deny
     "python3*": allow
+    "printf*": allow
     "tail*": allow
     "tree*": allow
     "uv*": allow

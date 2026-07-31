@@ -36,6 +36,7 @@ Agent names are drawn from Dennis E. Taylor's "Bobiverse" series (starting with 
 | **@howard-terraform** | Howard — wealth accumulator, controls resources | Terraform manages infrastructure resources — Howard hoards and controls them. |
 | **@roamer-helm** | Roamers — mobile construction robots | Roamers deliver materials and assemble components — just like Helm assembles chart templates. |
 | **@skippy-gitops** | The Skippies — mission-focused, AI-creation obsessed | GitOps is about automated, self-managing deployments — the Skippies' ethos of autonomous systems. |
+| **@henry-wiz** (Wiz scan triage) | Henry Roberts — rehabilitated loner, paranoid but functional | Wiz Code scan triage, exception management, vulnerability assessment. Paranoid-mode security reviews. |
 | **@vehement-gpt** (critique — GPT) | VEHEMENT — terrorist group opposing replicants | Cross-model critique from GPT family. The opposition force — challenges the Claude consensus with a fundamentally different perspective. Part of the VEHEMENT team. |
 | **@vehement-gemini** (critique — Gemini) | VEHEMENT — terrorist group opposing replicants | Cross-model critique from Gemini family. Same opposition mission, different model family. Part of the VEHEMENT team. |
 
@@ -47,7 +48,6 @@ These Bobiverse characters are NOT yet assigned and can be used for new agents:
 
 | Character | Personality/Traits | Good Fit For |
 |-----------|-------------------|--------------|
-| **Henry Roberts** | Rehabilitated loner, paranoid but functional | Security hardening, paranoid-mode reviews |
 | **Spike** | Bob's AI cat in VR, displays realistic disloyalty | Chaos testing, fuzzing agent |
 | **Jeeves** | VR bartender, silent and efficient | Silent helper/utility agent |
 | **Butterworth** | Highest-ranking USE survivor, provides plans | Planning/project management agent |

@@ -54,6 +54,10 @@ The `dcat-jira` references are to a private wrapper script that syncs dogcat iss
 # → @riker implements
 # → @guppi (commit-and-push): "Add password reset via email..."
 
+# 2b. Sync with main if needed
+"@bob sync with main"
+# → @guppi (sync): merges origin/main, resolves trivial conflicts
+
 # 3. Mark ready
 "@bob this is ready for review"
 # → @guppi (pr-ready): PR #123 marked ready
@@ -99,6 +103,12 @@ The `dcat-jira` references are to a private wrapper script that syncs dogcat iss
 - Purpose: Vulnerability detection, OWASP Top 10, secrets scanning
 - Best for: Pre-deployment security audits
 
+**@henry-wiz** - Wiz Code scan triage specialist
+
+- Model: sonnet-5
+- Purpose: Wiz Code scan triage, exception management, vulnerability assessment
+- Best for: Wiz Code PR/VCS/CLI scan findings, exception recommendations, paranoid-mode security reviews
+
 **@bridget** - Goal-backward verification specialist
 
 - Model: sonnet-4.6 (smart enough for verification)
@@ -115,7 +125,7 @@ The `dcat-jira` references are to a private wrapper script that syncs dogcat iss
 - Model: haiku-4.5 (fast)
 - Purpose: Handles complete git lifecycle (branch, worktree, commit, push, PR management)
 - Visibility: Hidden from autocomplete, invoked by @bob
-- Operations: `create-branch`, `commit-and-push`, `rebase`, `pr-ready`
+- Operations: `create-branch`, `commit-and-push`, `sync`, `rebase`, `pr-ready`
 
 **@mario** - Quick reconnaissance (hidden)
 
@@ -204,12 +214,23 @@ When agents call other agents, they use structured JSON output:
 
 This keeps costs reasonable while maintaining quality where it matters.
 
+## Validation
+
+Run the agent analyzer to validate all agent configurations:
+
+```bash
+~/.opencode/shared/scripts/agent_analyzer.py -d ~/.opencode/shared/agents
+```
+
+Expected output: 21 total agents
+
 ## Adding New Agents
 
 1. Create `agent-name.md` in this directory
 2. Add YAML frontmatter with `mode`, `model`, `temperature`, `permission`
-3. Test the agent
-4. Update this README
+3. Run agent_analyzer.py to validate
+4. Test the agent
+5. Update this README
 
 ## Permission System
 

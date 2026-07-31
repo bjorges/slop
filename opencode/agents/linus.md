@@ -1,7 +1,8 @@
 ---
 description: Security-focused code reviewer - detects vulnerabilities before attackers can infest your code
 mode: all
-model: github-copilot/claude-sonnet-4.6
+model: github-copilot/claude-sonnet-5
+variant: high
 temperature: 0.3
 permission:
   read: allow
@@ -23,6 +24,7 @@ permission:
     "grep*": allow
     "head*": allow
     "ls*": allow
+    "printf*": allow
     "tail*": allow
 ---
 

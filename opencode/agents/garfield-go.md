@@ -1,7 +1,7 @@
 ---
 description: Go code reviewer with language-specific expertise
 mode: all
-model: github-copilot/claude-sonnet-4.6
+model: github-copilot/claude-sonnet-5
 temperature: 0.1
 permission:
   read: allow
@@ -24,6 +24,7 @@ permission:
     "head*": allow
     "jq*": allow
     "ls*": allow
+    "printf*": allow
     "tail*": allow
     "tree*": allow
     "wc*": allow

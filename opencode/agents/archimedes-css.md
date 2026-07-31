@@ -24,6 +24,7 @@ permission:
     "head*": allow
     "jq*": allow
     "ls*": allow
+    "printf*": allow
     "tail*": allow
     "tree*": allow
     "wc*": allow

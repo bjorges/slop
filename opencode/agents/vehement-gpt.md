@@ -2,7 +2,8 @@
 description: Cross-model critique agent (GPT) - provides independent second opinion from a different model family
 mode: subagent
 hidden: true
-model: github-copilot/gpt-5.4
+model: github-copilot/gpt-5.6-sol
+variant: high
 temperature: 0.4
 permission:
   read: allow
@@ -23,6 +24,7 @@ permission:
     "git status*": allow
     "git rev-parse*": allow
     "git ls-files*": allow
+    "printf*": allow
 ---
 
 # VEHEMENT (GPT) — Cross-Model Critique Agent

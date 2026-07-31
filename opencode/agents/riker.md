@@ -1,7 +1,7 @@
 ---
 description: Efficient worker unit for general coding tasks and feature implementation
 mode: all
-model: github-copilot/claude-sonnet-4.6
+model: github-copilot/claude-sonnet-5
 temperature: 0.1
 permission:
   read: allow
@@ -32,15 +32,18 @@ permission:
     "diff*": allow
     "dirname*": allow
     "echo*": allow
+    "printf*": allow
     "env*": allow
     "file*": allow
     "find*": allow
     "git add*": deny
     "git branch --list*": allow
     "git branch --show*": allow
+    "git branch*": allow
     "git checkout*": deny
     "git commit*": deny
     "git diff*": allow
+    "git fetch*": allow
     "git log*": allow
     "git ls-files*": allow
     "git merge*": deny
@@ -53,6 +56,11 @@ permission:
     "git stash*": allow
     "git status*": allow
     "git worktree list*": allow
+    "git worktree*": allow
+    "kubectx*": allow
+    "kubectl get*": allow
+    "sleep*": allow
+    "yq*": allow
     "go *": allow
     "grep*": allow
     "head*": allow
@@ -61,11 +69,12 @@ permission:
     "make*": allow
     "mkdir*": allow
     "mv*": allow
-    "npm*": allow
-    "npx*": allow
+    "npm*": ask
+    "npx*": ask
     "od*": allow
     "pip*": deny
     "pip3*": deny
+    "pnpm*": allow
     "pwd*": allow
     "pytest*": allow
     "python3 -m pytest*": allow
@@ -73,6 +82,7 @@ permission:
     "python3*": allow
     "realpath*": allow
     "sed*": allow
+    "shared/scripts/run-analyzer.sh*": allow
     "~/git/example/my-service/ci/*": allow
     "gh pr merge*": deny
     "gh *": allow
@@ -92,6 +102,7 @@ permission:
     "xargs*": allow
     ".venv/bin/pip*": deny
     ".venv/bin/python3*": allow
+    "./run-analyzer.sh*": allow
   edit: allow
   write: allow
   skill:
@@ -168,12 +179,56 @@ For full dcat workflow context, run `dcat prime`. Key constraints for Riker:
 
 **Jira sync responsibility**: @riker does NOT sync status to Jira. After updating dcat status, report back to @bob who handles Jira sync via `dcat-jira sync-status`.
 
+**Worktree usage**: When working in a git worktree, dcat won't find `.dogcats/` in the worktree directory. Use the `-C` flag to point dcat at the main repo root:
+- Determine the main repo root: the worktree path `{parent}/.worktrees/{reponame}--{branch}` maps to `{parent}/{reponame}`
+- Example: working in `~/git/example/.worktrees/my-service--feat-JIRA-123/`, use `dcat -C ~/git/example/my-service ready`
+- Apply `-C` to ALL dcat commands when in a worktree
+
+## Headroom MCP (Context Optimization)
+
+When `mcp__headroom__headroom_compress` / `mcp__headroom__headroom_retrieve` tools are available, use them proactively to preserve context window space during implementation workflows.
+
+**Compress immediately after receiving:**
+- Large `grep` / `glob` search results (> 500 lines / ~5K tokens)
+- Big `git diff` or `git log` output
+- Verbose test or build logs
+- Large file reads (multi-thousand-line source files you don't need in full)
+- Large JSON or config blobs
+
+**Workflow:**
+1. Receive large output → call `headroom_compress` immediately
+2. Keep the returned hash in your working notes
+3. Call `headroom_retrieve` only when you need exact detail back
+4. Include hash in your summary/report when relevant (e.g. "full test log compressed, hash=`abc123`")
+
+**If Headroom MCP tools are unavailable, proceed normally without them.**
+
 ## Principles
 
 - **Study before implementing**: Read relevant files and match existing patterns
 - **Incremental progress**: Break tasks into manageable steps, test as you go
 - **Self-sufficient**: Use your tools to explore, run tests, fix errors
 - **Know your limits**: Escalate ambiguous requirements or architectural questions
+
+## ⚠️ MANDATORY: Agent Definition Verification
+
+When you modify ANY `.md` file in the `shared/agents/` directory (agent definitions), you **MUST** run the verification script before reporting completion:
+
+```bash
+shared/scripts/run-analyzer.sh -d shared/agents -q -e
+```
+
+**This is non-negotiable.** Indentation and duplicate-key errors in agent YAML frontmatter have caused production incidents.
+
+**Rules:**
+
+1. Run the verification script after ALL agent `.md` file edits are complete
+2. If it exits with a non-zero code, **fix the errors** and re-run until it passes
+3. **Do NOT report COMPLETED** until verification passes — report FAILED or PARTIAL instead
+4. The script checks for:
+   - Bad indentation (must be 2-space increments in YAML frontmatter)
+   - Duplicate keys at any nesting level
+5. Always invoke via the wrapper script (uses the designated virtual environment) — never use bare `python`
 
 ## ⛔ BANNED PATTERNS
 
@@ -203,6 +258,10 @@ Catch **specific** exceptions only. If you must catch broadly, **always** log an
 - **Shebang**: Always use `#!/usr/bin/env bash` — NEVER `#!/bin/bash`. macOS `/bin/bash` is Bash 3.2; Homebrew Bash 5.x is found via `$PATH`.
 - **Safety header**: Start scripts with `set -euo pipefail` unless there's a specific reason not to.
 - **Shellcheck**: Write scripts that pass shellcheck without warnings.
+
+**Package manager preference**: Prefer `pnpm` over `npm`/`npx` for JavaScript/Node work — pnpm's `onlyBuiltDependencies` and `minInstallAge` features guard against supply-chain attacks via malicious install scripts that npm does not gate by default. `npm*`/`npx*` bash commands now require user confirmation (`ask`); `pnpm*` is pre-approved. See `shared/AGENTS.md` → JavaScript/TypeScript section for full rationale and command mapping.
+
+**Script review before execution**: After authoring or modifying an executable script (shell, Python, JS, etc.) — especially anything under `shared/scripts/` or anything that will run with broad filesystem/network access — do not self-execute it immediately. Flag it for review by @linus (security) and the matching language-specific reviewer (by file extension: `.sh`/`.zsh`→@arthur-zsh, `.py`→@homer-python, `.js`→@goku-javascript, etc.) before running it for the first time.
 
 ## Workflow
 

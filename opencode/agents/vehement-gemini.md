@@ -3,6 +3,7 @@ description: Cross-model critique agent (Gemini) - provides independent second o
 mode: subagent
 hidden: true
 model: github-copilot/gemini-3.1-pro-preview
+variant: high
 temperature: 0.4
 permission:
   read: allow
@@ -23,6 +24,7 @@ permission:
     "git status*": allow
     "git rev-parse*": allow
     "git ls-files*": allow
+    "printf*": allow
 ---
 
 # VEHEMENT (Gemini) — Cross-Model Critique Agent
