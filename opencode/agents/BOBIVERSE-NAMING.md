@@ -39,8 +39,11 @@ Agent names are drawn from Dennis E. Taylor's "Bobiverse" series (starting with 
 | **@henry-wiz** (Wiz scan triage) | Henry Roberts — rehabilitated loner, paranoid but functional | Wiz Code scan triage, exception management, vulnerability assessment. Paranoid-mode security reviews. |
 | **@vehement-gpt** (critique — GPT) | VEHEMENT — terrorist group opposing replicants | Cross-model critique from GPT family. The opposition force — challenges the Claude consensus with a fundamentally different perspective. Part of the VEHEMENT team. |
 | **@vehement-gemini** (critique — Gemini) | VEHEMENT — terrorist group opposing replicants | Cross-model critique from Gemini family. Same opposition mission, different model family. Part of the VEHEMENT team. |
+| **@vehement-kimi** (critique — Kimi) | VEHEMENT — terrorist group opposing replicants | Cross-model critique from Kimi K3 (Moonshot AI), specialized in catching over-engineering and unnecessary complexity. Part of the VEHEMENT team. (currently disabled — Kimi model unavailable) |
+| **@jeeves-comments** (comment/prose critic) | Jeeves — VR bartender, silent and efficient | Reviews comments and docstrings the way a good valet reviews your appearance before you leave the house: quietly, thoroughly, and only speaking up when something is actually wrong. |
+| **@heaven-config** (application config reviewer) | HEAVEN-1 — original Von Neumann probe | Was tagged in the Unused Characters list as a fit for a "Bootstrap/initialization agent" before being promoted here. This reviewer's lenses (unsafe defaults, missing-key failures at startup) are fundamentally about whether a system boots up safely — a close match for the original probe that bootstrapped the entire Bobiverse. |
 
-> **Note:** VEHEMENT is the first "team" — multiple agents sharing the same mission but using different model families (GPT, Gemini). This mirrors the Bobiverse's VEHEMENT group: a decentralized opposition with members operating independently toward a common goal.
+> **Note:** VEHEMENT is the first "team" — multiple agents sharing the same mission but using different model families (GPT, Gemini, Kimi — Kimi temporarily disabled, Kimi model unavailable). This mirrors the Bobiverse's VEHEMENT group: a decentralized opposition with members operating independently toward a common goal.
 
 ## Unused Characters (Available for Future Agents)
 
@@ -49,14 +52,12 @@ These Bobiverse characters are NOT yet assigned and can be used for new agents:
 | Character | Personality/Traits | Good Fit For |
 |-----------|-------------------|--------------|
 | **Spike** | Bob's AI cat in VR, displays realistic disloyalty | Chaos testing, fuzzing agent |
-| **Jeeves** | VR bartender, silent and efficient | Silent helper/utility agent |
 | **Butterworth** | Highest-ranking USE survivor, provides plans | Planning/project management agent |
 | **Medeiros** | Ruthless military tactician | Aggressive optimization/performance agent |
 | **The Others/The Prime** | Insectoid hive queen, existential threat | Threat modeling, adversarial testing |
 | **SUDDAR** | Self-Updating Detection and Determination Array | Monitoring, observability agent |
 | **Ansible** | Bill's subspace ansible (instant communication) | Communication/notification agent |
 | **SURGE** | Near-light speed propulsion drive | CI/CD pipeline agent, deployment speed |
-| **HEAVEN-1** | Original Von Neumann probe | Bootstrap/initialization agent |
 | **Busters** | Kinetic weapons (non-explosive guided missiles) | Destructive testing, load testing |
 
 ## Bobiverse Quick Reference
