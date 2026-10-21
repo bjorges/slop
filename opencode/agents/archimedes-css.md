@@ -1,7 +1,7 @@
 ---
 description: CSS code reviewer with language-specific expertise
 mode: all
-model: github-copilot/claude-haiku-4.5
+model: github-copilot/claude-haiku-5.5
 temperature: 0.1
 permission:
   read: allow

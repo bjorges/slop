@@ -1,7 +1,7 @@
 ---
 description: Wiz Code PR scan triage and exception-management specialist for vulnerabilities, SAST, IaC, secrets, sensitive data, software management, and malware findings
 mode: subagent
-model: github-copilot/claude-sonnet-5
+model: github-copilot/claude-sonnet-5.5
 variant: high
 temperature: 0.2
 permission:

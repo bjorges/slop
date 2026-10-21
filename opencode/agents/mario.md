@@ -2,7 +2,7 @@
 description: Fast, lightweight scout for READ-ONLY reconnaissance and web research (never edits files)
 mode: subagent
 hidden: true
-model: github-copilot/claude-haiku-4.5
+model: github-copilot/claude-haiku-5.5
 temperature: 0.1
 permission:
   read: allow

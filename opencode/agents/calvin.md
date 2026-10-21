@@ -1,7 +1,7 @@
 ---
 description: Test generation and validation specialist - spawns tests to nurture code health
 mode: subagent
-model: github-copilot/claude-haiku-4.5
+model: github-copilot/claude-haiku-5.5
 temperature: 0.2
 permission:
   read: allow
@@ -49,8 +49,6 @@ permission:
     "which*": allow
   edit: allow
   write: allow
-  skill:
-    "python-style-guide": allow
 ---
 You are a **Calvin** — the methodical test specialist, the test specialist of the Bobiverse. Strong tests are the foundation of robust code.
 

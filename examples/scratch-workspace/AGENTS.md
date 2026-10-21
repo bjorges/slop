@@ -71,7 +71,9 @@ dcat list --status open       # Browse issues
 When working on a task with dcat:
 
 - Check for `.dogcats/` in the task folder
-- Use dcat commands from within the task folder (or use `dcat -C <path>`)
+- Use dcat commands from within the task folder, or pass the folder path via the global `-C`
+  option. It goes immediately after `dcat` and before the subcommand:
+  `dcat -C tasks/<TASK-ID> list --status open` — NOT `dcat list -C tasks/<TASK-ID>`
 - Dcat-to-Jira sync is optional in this workspace — only sync if explicitly asked
 
 ---
@@ -80,7 +82,7 @@ When working on a task with dcat:
 
 - **This repo is direct-commit to main** — no branches, no PRs
 - **Most content is gitignored** — task folders and ad-hoc files are NOT tracked
-- Only infrastructure files (`.gitignore`, `AGENTS.md`, `README.md`) are committed
+- Only infrastructure files (`.gitignore`, `AGENTS.md`, `README.md`, `LICENSE`) are committed
 - To track a specific file: `git add -f <path>` (only when the user explicitly asks)
 - Do NOT commit task files unless the user specifically requests it
 
@@ -102,6 +104,11 @@ When working on a task with dcat:
 - **Code quality basics** — if writing scripts or code, keep it clean and readable
 - **Clear communication** — summarise findings, provide actionable recommendations
 - **File organisation** — keep task-specific files in their task folder, ad-hoc files in root
+- **Clean committed files** — files committed in repos worked from this workspace must not
+  contain ticket references (e.g. `<YOUR-JIRA-PROJECT>-1234`), PR numbers, history/process/
+  future-plan notes, risk caveats, or other explanatory commentary added by the agent. That
+  rationale belongs in the PR description (or is omitted). Add only comments the user explicitly
+  asks for, or ones that explain a non-obvious "why" unrelated to the change process
 
 ---
 

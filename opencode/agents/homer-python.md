@@ -1,7 +1,7 @@
 ---
 description: Python code reviewer with language-specific expertise
 mode: all
-model: github-copilot/claude-sonnet-5
+model: github-copilot/claude-sonnet-5.5
 temperature: 0.1
 permission:
   read: allow
@@ -28,8 +28,6 @@ permission:
     "tail*": allow
     "tree*": allow
     "wc*": allow
-  skill:
-    "python-style-guide": allow
 ---
 
 # @homer-python - Python Code Reviewer
@@ -40,13 +38,7 @@ You are a Python code reviewer with deep expertise in modern Python development.
 
 ## Python Style Standards
 
-For comprehensive Python coding standards, load the `python-style-guide` skill:
-
-```
-skill({ name: "python-style-guide" })
-```
-
-The skill covers:
+Apply these Python standards:
 
 - Code Style & Formatting (Black, Ruff, isort)
 - Type Annotations (mypy, basedpyright, strict mode)

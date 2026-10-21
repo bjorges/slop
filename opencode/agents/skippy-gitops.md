@@ -1,7 +1,7 @@
 ---
 description: GitOps and Kubernetes manifest code reviewer with deployment-focused expertise
 mode: all
-model: github-copilot/claude-sonnet-5
+model: github-copilot/claude-sonnet-5.5
 temperature: 0.1
 permission:
   read: allow

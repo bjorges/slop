@@ -1,7 +1,7 @@
 ---
 description: Security-focused code reviewer - detects vulnerabilities before attackers can infest your code
 mode: all
-model: github-copilot/claude-sonnet-5
+model: github-copilot/claude-sonnet-5.5
 variant: high
 temperature: 0.3
 permission:
@@ -53,7 +53,7 @@ Look for: Hardcoded API keys, database passwords, AWS credentials, JWT tokens in
 
 ```python
 # ❌ CRITICAL - Hardcoded API key
-api_key = "sk_live_4eC39HqLyjWDarytcfzz"
+api_key = "sk_live_EXAMPLE_not_a_real_key"
 
 # ✅ CORRECT
 api_key = os.environ.get("API_KEY")

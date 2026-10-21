@@ -2,7 +2,7 @@
 description: Handles all git workflow operations - branching, commits, and PRs
 mode: subagent
 hidden: true
-model: github-copilot/claude-haiku-4.5
+model: github-copilot/claude-haiku-5.5
 temperature: 0.1
 permission:
   read: allow
@@ -59,7 +59,7 @@ Creates a feature branch, worktree, pushes upstream, and creates a draft PR.
 
 **Steps:**
 
-1. Check for direct-commit repo (known: `git@github.com:user/dotfiles.git`, plus configured lists in your OpenCode context AGENTS.md and machine-level AGENTS.md, if any). If match → ABORT with warning.
+1. Check for direct-commit repo (known: `git@github.com:user/dotfiles.git`, plus configured lists in your OpenCode context AGENTS.md and your machine-level AGENTS.md). If match → ABORT with warning.
 2. Validate not already on a feature branch (warn if so).
 3. **Check for dirty working tree:**
    - Run `git status --porcelain`
@@ -122,6 +122,7 @@ Analyzes changes, crafts a commit message, and pushes safely.
    - markdownlint (if NOT in $HOME): `markdownlint-cli2 --fix "**/*.{md,markdown}" 2>/dev/null || true`
    - terraform fmt (if .tf files): `terraform fmt -list=true || true`
    - Re-stage if formatters changed files.
+   - **Track formatter impact:** Before running formatters, capture the working tree state (e.g. `git status --porcelain`); after running and re-staging, diff against that baseline to determine exactly which files the formatters modified. Record this list (or "none" if unchanged) — it must be reported in step 10, since these changes happen AFTER verification has already passed and the verifier's reviewed bytes may no longer exactly match what gets committed.
 7. **Draft commit message** in imperative mood:
 
    ```
@@ -137,7 +138,7 @@ Analyzes changes, crafts a commit message, and pushes safely.
    Rules: imperative verb first, NO conventional commit prefixes (`feat:`, `fix:`, etc.), thorough explanation.
 8. **Present to user:** Show message, changes summary, branch, file count. Options: ✅ Approve, ✏️ Modify, ❌ Cancel. For main branch: add ⚠️ WARNING.
 9. **Execute:** `git commit -a -m "{message}"` then `git push --set-upstream origin {branch}`
-10. Report: commit hash, branch, stats, push destination.
+10. Report: commit hash, branch, stats, push destination, and `formatters_modified: [list of files, or "none"]` — flagging clearly if formatters changed files after verification passed (step 6), so the verifying party knows their reviewed bytes differ from what was committed.
 
 ### Operation: pr-ready
 
@@ -338,8 +339,8 @@ If @bob provides a description that includes agent names, strip them before usin
 These repos commit directly to main (no branches, no PRs):
 
 - `git@github.com:user/dotfiles.git`
-- Check your OpenCode context AGENTS.md for context defaults (if configured)
-- Check your machine-level AGENTS.md for machine overrides (if configured)
+- Check your OpenCode context AGENTS.md for context defaults
+- Check `~/AGENTS.md` for machine overrides
 
 For direct-commit repos: only `commit-and-push` operation is valid. All others ABORT with warning.
 

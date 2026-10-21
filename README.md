@@ -9,6 +9,10 @@ Heavily inspired by — and named after — [@oroddlokken's slop repo](https://g
 - [`opencode/agents/`](opencode/agents/) — my OpenCode sub-agent definitions (the Bobiverse crew). A coordinator agent (`bob`) delegates to specialists for recon, implementation, verification, code review, git workflow, and cross-model critique.
 - [`examples/scratch-workspace/`](examples/scratch-workspace/) — a reusable template for a scratch/coordination workspace: a local git repo used for ad-hoc investigation and multi-repo task coordination, with agent rules, an inverse-whitelist `.gitignore`, and optional [dogcat](https://github.com/oroddlokken/dogcat) integration.
 
+- [`opencode/`](opencode/) — also holds shared skills, commands and helper scripts, plus an [`opencode.example.json`](opencode/opencode.example.json) showing the config shape (MCP servers etc.).
+
+> **Version note:** the `opencode/` content is the **final snapshot targeting OpenCode 1.x**, tagged `opencode-1.x-final`. See [`opencode/VERSION-NOTES.md`](opencode/VERSION-NOTES.md).
+
 ## My OpenCode agent workflow
 
 Here's how the agents collaborate on a non-trivial task — a coordinator (`bob`) orchestrates specialists through several quality gates before any code lands.
@@ -51,6 +55,8 @@ Here's how the agents collaborate on a non-trivial task — a coordinator (`bob`
    archimedes 🎨 • milo 🏛️ • arthur 🐚
    howard ☁️ • roamer ⛵ • skippy 🚀
    └─▶ Nits? back to @riker
+📝 Conditional: @jeeves-comments (comment/doc prose) and
+   @heaven-config (agent/config changes) when the diff touches them
    ↓
 📦 @guppi commit-and-push (logical commits)
    ↓ (repeat impl → verify → commit per unit)

@@ -1,7 +1,7 @@
 ---
 description: Deep reasoning agent for complex code architecture and design decisions
 mode: all
-model: github-copilot/claude-opus-5
+model: github-copilot/claude-opus-5.5
 variant: high
 temperature: 0.3
 permission:

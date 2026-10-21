@@ -40,7 +40,9 @@ dcat init
 #    https://opencode.ai/
 #    The bundled AGENTS.md is picked up automatically.
 
-# 5. Start working — create a task folder for any long-running work
+# 5. (Optional) Add the shell aliases from "Shell aliases" below
+
+# 6. Start working — create a task folder for any long-running work
 mkdir -p tasks/<TASK-ID>
 ```
 
@@ -53,6 +55,7 @@ mkdir -p tasks/<TASK-ID>
 ├── AGENTS.md                  ← agent rules for this workspace (tracked)
 ├── README.md                  ← this file (tracked)
 ├── .gitignore                 ← inverse-whitelist: most content ignored (tracked)
+├── LICENSE                    ← license text (tracked)
 │
 ├── tasks/                     ← long-running task folders (gitignored by default)
 │   └── <TASK-ID>/
@@ -63,6 +66,46 @@ mkdir -p tasks/<TASK-ID>
 │
 └── <ad-hoc-files>             ← ephemeral scripts, snippets, etc. (gitignored)
 ```
+
+---
+
+## Shell aliases (optional)
+
+Designed for use with [opencode](https://opencode.ai). Add to `~/.zshrc` / `~/.bashrc`,
+adjusting the path and agent name to your setup:
+
+```bash
+# Quick scratch session — ad-hoc investigation, no task context
+alias ocx="opencode ~/my-scratch --agent bob"
+
+# Task-focused session — creates the folder if needed, injects context via --prompt
+ocxt() {
+    local task_id="${1:?Usage: ocxt <TASK-ID>}"
+    local task_dir="$HOME/my-scratch/tasks/$task_id"
+    mkdir -p "$task_dir"
+    opencode "$HOME/my-scratch" --agent bob \
+        --prompt "Working on task $task_id. Context files are in tasks/$task_id/. Read the files there to understand current state before proceeding."
+}
+```
+
+Usage: `ocx` for ad-hoc work, `ocxt <YOUR-JIRA-PROJECT>-123` for a task-focused session.
+Reload your shell afterwards (`exec zsh` or `source ~/.bashrc`).
+
+### MCP configuration
+
+If you use MCP servers, an `opencode.json` symlink in the workspace root can point at your
+real config (e.g. `ln -s ~/opencode.json opencode.json`) so the servers are available here.
+It is gitignored by default; ignore this if you don't use MCP.
+
+### Direct-commit repository
+
+This repo is meant for direct commits to main (no branches or PRs). If your opencode setup
+uses git-workflow orchestration, add this repo to its direct-commit list.
+
+### Clean committed files
+
+When agents work on other repos from this workspace, files they commit must stay free of
+ticket references, PR numbers and process commentary — see `AGENTS.md`.
 
 ---
 
